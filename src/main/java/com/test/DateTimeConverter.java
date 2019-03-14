@@ -2,11 +2,12 @@ package com.test;
 
 import org.apache.johnzon.mapper.Converter;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@ApplicationScoped
 public class DateTimeConverter implements Converter<Date> {
     private final ThreadLocal<DateFormat> format;
 
