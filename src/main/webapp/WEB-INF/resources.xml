@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <resources>
-  <Service id="johnzon" class-name="com.test.ConfigurableJohnzonProvider">
+  <Service id="johnzon" class-name="com.test.CustomDateProvider">
     accessModeName = field
     adapter = java.util.Date/java.lang.String/com.test.DateTimeAdapter
   </Service>

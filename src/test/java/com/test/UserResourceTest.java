@@ -35,8 +35,11 @@ public class UserResourceTest {
     }
 
     @Test
-    public void testUsers() {
-        Client client = ClientBuilder.newClient().register(JohnzonProvider.class);
+    public void testUsers() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        CustomDateProvider customDateProvider = new CustomDateProvider();
+        customDateProvider.setAdapter("java.util.Date/java.lang.String/com.test.DateTimeAdapter");
+
+        Client client = ClientBuilder.newClient().register(customDateProvider);
         WebTarget target = client.target(base.toExternalForm() + "/api");
         Response response = target
                 .path("users")
