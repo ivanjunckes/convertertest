@@ -1,34 +1,35 @@
 package com.test;
 
-import org.apache.johnzon.mapper.Converter;
+import java.text.ParseException;
+import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.apache.commons.lang3.time.FastDateFormat;
+import org.apache.johnzon.mapper.Converter;
+
 @ApplicationScoped
 public class DateTimeConverter implements Converter<Date> {
-    private final ThreadLocal<DateFormat> format;
+
+    private final FastDateFormat df;
+
+    public DateTimeConverter(final String pattern) {
+        df = FastDateFormat.getInstance(pattern);
+    }
 
     public DateTimeConverter() {
-        format = new ThreadLocal<DateFormat>() {
-            @Override
-            protected DateFormat initialValue() {
-                return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            }
-        };
+        this("dd/MM/yyyy HH:mm:ss");
     }
 
     @Override
     public String toString(final Date instance) {
-        return format.get().format(instance);
+        return df.format(instance);
     }
 
     @Override
     public Date fromString(final String text) {
         try {
-            return format.get().parse(text);
+            return df.parse(text);
+
         } catch (final ParseException e) {
             throw new IllegalArgumentException(e);
         }
