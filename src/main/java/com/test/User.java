@@ -1,14 +1,11 @@
 package com.test;
 
-import org.apache.johnzon.mapper.JohnzonConverter;
-
 import java.util.Date;
 
 public class User {
 
     private Long id;
 
-    @JohnzonConverter(DateTimeConverter.class)
     private Date date;
 
     public User(){
